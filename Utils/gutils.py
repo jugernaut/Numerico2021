@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Aug  6 17:35:09 2020
-
 @author: luiggi
 """
 import numpy as np
@@ -17,7 +16,6 @@ class planoCartesiano():
     def __init__(self, rows = 1, cols = 1, par = None, par_fig={'figsize':(10,5)}, title=''):
         """
         Crea e inicializa una figura de matplotlib.
-
         Parameters
         ----------
         rows : int, opcional
@@ -30,7 +28,6 @@ class planoCartesiano():
         par_fig : dict, opcional
             Diccionario con los parámetros para decorar la figura. 
             The default is {}.
-
         """
         self.__fig = plt.figure(**par_fig)
         self.__fig.suptitle(title, fontweight='light', fontsize='12', color='blue')
@@ -141,13 +138,11 @@ class planoCartesiano():
     def legend(self, par=None):
         """
         Muestra las leyendas de todos los subplots, si están definidos.
-
         Parameters
         ----------
         par : dict, opcional
             Diccionario con los parámetros para decorar las leyendas. 
             The default is None.
-
         Returns
         -------
         None.
@@ -155,7 +150,6 @@ class planoCartesiano():
         See Also
         --------
         matplotlib.axes.Axes.legend().
-
         """
         if par != None:   
             [self.__ax[n].legend(**par) for n in range(0,self.__nfigs)]        
@@ -230,7 +224,3 @@ if __name__ == '__main__':
     vis2.scatter(x = semanas, y = porciones)
     vis2.ticks(xticks = semanas)
     vis2.show()
-
-
-
-
