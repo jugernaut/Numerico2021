@@ -204,6 +204,34 @@ a:   limite inferior del rango inicial
 b:   limite superior del rango inicial
 """
 def biseccion(f,Tol,N,a,b):
+    """
+    implementa el metodo de la biseccion
+    para encontrar la raiz de una funcion.
+    
+    Parameters
+    ----------
+    f: function
+    funcion para calcular raiz.
+    
+    Tol: float
+    Tolerancia.
+    
+    N: integer
+    Numero de iteraciones maximo.
+    
+    a: float
+    limite izquierdo.
+    
+    b: float
+    limite derecho.
+    
+    Returns
+    -------
+    float
+    La raiz de la funcion f.
+    list
+    Valores en la sucesion del algoritmo.
+    """
     sucesion=[]
     fa=f(a)
     fb=f(b)
