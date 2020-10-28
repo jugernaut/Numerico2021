@@ -194,15 +194,9 @@ def RMS(ua, u):
     """
     return np.sqrt(np.sum((ua - u)**2) / len(ua))
 
+def BISECCION(ua, u):
+    return 1.0
 
-"""Esta funcion implementa el metodo de la biseccion
-para encontrar la raiz de una funcion.
-f:   funcion de la cual se busca la raiz
-Tol: tolerancia del error numerico
-N:   numero maximo de iteraciones
-a:   limite inferior del rango inicial
-b:   limite superior del rango inicial
-"""
 def Biseccion(f,Tol,N,a,b):
     """
     implementa el metodo de la biseccion
