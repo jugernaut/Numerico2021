@@ -203,7 +203,7 @@ N:   numero maximo de iteraciones
 a:   limite inferior del rango inicial
 b:   limite superior del rango inicial
 """
-def biseccion(f,Tol,N,a,b):
+def Biseccion(f,Tol,N,a,b):
     """
     implementa el metodo de la biseccion
     para encontrar la raiz de una funcion.
