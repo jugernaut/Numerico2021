@@ -194,8 +194,24 @@ def RMS(ua, u):
     """
     return np.sqrt(np.sum((ua - u)**2) / len(ua))
 
-def BISECCION(ua, u):
-    return 1.0
+def RMS1(ua, u):
+    """
+    Calcula el error cuadrático medio entre u y ua.
+    
+    Parameters
+    ----------
+    ua: np.array
+    Arreglo de valores aproximados.
+    
+    u: np.array
+    Arreglo de valores exactos.
+    
+    Returns
+    -------
+    float
+    El error cuadrático medio entre u y ua.
+    """
+    return np.sqrt(np.sum((ua - u)**2) / len(ua))
 
 def Biseccion(f,Tol,N,a,b):
     """
