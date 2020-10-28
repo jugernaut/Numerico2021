@@ -174,15 +174,35 @@ class planoCartesiano():
         "Plotter.plot(%d) out of bounds. Valid bounds : [1,%d]" % (n,self.__nfigs)        
 
         return self.__ax[n-1].annotate(**par)
+
+def RMS(ua, u):
+    """
+    Calcula el error cuadrático medio entre u y ua.
     
-'''Esta funcion implementa el metodo de la biseccion
+    Parameters
+    ----------
+    ua: np.array
+    Arreglo de valores aproximados.
+    
+    u: np.array
+    Arreglo de valores exactos.
+    
+    Returns
+    -------
+    float
+    El error cuadrático medio entre u y ua.
+    """
+    return np.sqrt(np.sum((ua - u)**2) / len(ua))
+
+
+"""Esta funcion implementa el metodo de la biseccion
 para encontrar la raiz de una funcion.
 f:   funcion de la cual se busca la raiz
 Tol: tolerancia del error numerico
 N:   numero maximo de iteraciones
 a:   limite inferior del rango inicial
 b:   limite superior del rango inicial
-'''
+"""
 def biseccion(f,Tol,N,a,b):
     sucesion=[]
     fa=f(a)
@@ -215,25 +235,6 @@ def biseccion(f,Tol,N,a,b):
         x0=x1
         #se incrementa el contador de iteraciones
         n=n+1
-
-def RMS(ua, u):
-    """
-    Calcula el error cuadrático medio entre u y ua.
-    
-    Parameters
-    ----------
-    ua: np.array
-    Arreglo de valores aproximados.
-    
-    u: np.array
-    Arreglo de valores exactos.
-    
-    Returns
-    -------
-    float
-    El error cuadrático medio entre u y ua.
-    """
-    return np.sqrt(np.sum((ua - u)**2) / len(ua))
         
 #----------------------- TEST OF THE MODULE ----------------------------------   
 if __name__ == '__main__':
