@@ -209,9 +209,9 @@ def biseccion(f,Tol,N,a,b):
         #en caso de no cumplir el criterio de tolerancia
         #se actualiza el rango de busqueda
         if (fa*fx <0.0):
-            b=x0   
+            b=x1  
         if (fx*fa >0.0):      
-            a=x0
+            a=x1
         x0=x1
         #se incrementa el contador de iteraciones
         n=n+1
