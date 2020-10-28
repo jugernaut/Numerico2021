@@ -174,7 +174,47 @@ class planoCartesiano():
         "Plotter.plot(%d) out of bounds. Valid bounds : [1,%d]" % (n,self.__nfigs)        
 
         return self.__ax[n-1].annotate(**par)
-
+    
+'''Esta funcion implementa el metodo de la biseccion
+para encontrar la raiz de una funcion.
+f:   funcion de la cual se busca la raiz
+Tol: tolerancia del error numerico
+N:   numero maximo de iteraciones
+a:   limite inferior del rango inicial
+b:   limite superior del rango inicial
+'''
+def biseccion(f,Tol,N,a,b):
+    sucesion=[]
+    fa=f(a)
+    fb=f(b)
+    #no hay un cambio de signo (teorema del valor medio)
+    #no existe raiz en el intervalo [a,b]
+    if fa*fb>0:
+        print ("no hay raiz en [a,b]")
+        return
+    #contador de iteraciones    
+    n=1
+    x0=0.0
+    #mientras no se exceda el numero de iteraciones
+    while n<=N:
+        #se busca la raiz en el punto medio
+        x1=(a+b)/2.0
+        fx=f(x1)
+        sucesion.append(x1)
+        #en caso de que la iteracion siguiente y la diferencia
+        #entre la iteracion anterior no excedan Tol, entonces
+        #la iteracion actual se aproxima a la solucion buscada
+        if abs(f(x1)) <= Tol and abs(x1-x0) <= Tol:
+            return x1, sucesion
+        #en caso de no cumplir el criterio de tolerancia
+        #se actualiza el rango de busqueda
+        if (fa*fx <0.0):
+            b=x0   
+        if (fx*fa >0.0):      
+            a=x0
+        x0=x1
+        #se incrementa el contador de iteraciones
+        n=n+1
 
 def RMS(ua, u):
     """
