@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 #plt.style.use('seaborn')
 
-
 class planoCartesiano():
     
     def __init__(self, rows = 1, cols = 1, par = None, par_fig={'figsize':(10,5)}, title=''):
@@ -213,7 +212,7 @@ def RMS1(ua, u):
     """
     return np.sqrt(np.sum((ua - u)**2) / len(ua))
 
-def Biseccion(f,Tol,N,a,b):
+def biseccion(f,Tol,N,a,b):
     """
     implementa el metodo de la biseccion
     para encontrar la raiz de una funcion.
@@ -274,32 +273,49 @@ def Biseccion(f,Tol,N,a,b):
         #se incrementa el contador de iteraciones
         n=n+1
         
+'''Esta funcion implementa el metodo de la falsa posicion
+para encontrar la raiz de una funcion.
+f:   funcion de la cual se busca la raiz
+Tol: tolerancia del error numerico
+N:   numero maximo de iteraciones
+a:   limite inferior del rango inicial
+b:   limite superior del rango inicial
+'''
+def falsaPosicion(f,Tol,N,a,b):
+    fa=f(a)
+    fb=f(b)
+    #en caso de que no haya cambio de signo, no existe raiz
+    if fa*fb>0:
+        print("No existe raiz en [a,b]")
+        return
+    #contador de iteraciones
+    n=1
+    #se toma una raiz inicial arbitraria   
+    x0=0.0
+    sucesion = []
+    #mientras no se exceda el numero de iteraciones
+    while n<=N:
+        #se actualiza el rango de busqueda
+        fa,fb =f(a),f(b)
+        #se calcula la nueva iteracion
+        x1= (a*fb-b*fa)/(fb-fa)
+        fx=f(x1)
+        sucesion.append(x1)
+        #en caso de que la diferencia entre la iteracion actual
+        #y la iteracion anterior no excedan Tol, y que la raiz
+        #evaluada no exceda la tolerancia, se devuelve la raiz
+        if abs(f(x1)) <= Tol and abs(x1-x0) <= Tol:
+            return x1, sucesion
+        #en caso de no cumplir el criterio de tolerancia
+        #se actualiza el rango de busqueda
+        if (fa*fx <0.0):
+            b=x1 
+        if (fx*fa >0.0):      
+            a=x1
+        #se actualiza x0
+        x0=x1
+        #se incrementa el contador de iteraciones
+        n=n+1
+        
 #----------------------- TEST OF THE MODULE ----------------------------------   
 if __name__ == '__main__':
-
-    axis_par1 = [{'title':'1', 'xlabel':'x', 'ylabel':'y'},
-                {'title':'Ejemplo 1', 'xlabel':'$x$', 'ylabel':'sin($x$)'},
-                {'title':'3', 'xlabel':'n'}]
-    vis1 = planoCartesiano(2, 2, axis_par1, title='Testing: plot() & scatter()')
-    
-    semanas   = [ 1, 2, 3, 4, 5, 6, 7, 8, 9,10]
-    porciones = [ 4, 9,18,30,43,52,57,59,60,60]
-
-    vis1.plot(1, semanas, porciones)
-    vis1.ticks(1, xticks=semanas)
-    
-    x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-    y = np.sin(x)
-    vis1.ticks(2, trig = True) 
-    vis1.plot(2, x, y)
-    
-    par_f ={'figsize':(5,5)}
-    par = [{'title':'Negocio de chilaquiles', 
-            'xlabel':'Semanas',
-            'ylabel':'Porciones vendidas'}]
-
-    vis2 = planoCartesiano(par=par, par_fig=par_f)
-    vis2.plot(x = semanas, y = porciones)
-    vis2.scatter(x = semanas, y = porciones)
-    vis2.ticks(xticks = semanas)
-    vis2.show()
