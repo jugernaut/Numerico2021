@@ -77,7 +77,7 @@ class planoCartesiano():
                     
         return out     
 
-    def format_func(value, tick_number):
+    def format_func(self, value, tick_number):
         # find number of multiples of pi/2
         N = int(np.round(2 * value / np.pi))
         if N == 0:
@@ -317,8 +317,35 @@ def falsaPosicion(f,Tol,N,a,b):
         #se incrementa el contador de iteraciones
         n=n+1
         
+    '''Esta funcion implementa el metodo de la falsa posicion
+para encontrar la raiz de una funcion.
+f:   funcion de la cual se busca la raiz
+df:  derivada de f
+Tol: tolerancia del error numerico
+N:   numero maximo de iteraciones
+x0:  aproximacion inicial
+'''
+def newton(f,Tol,N,x0):
+    #contador de iteraciones
+    n=1
+    #mientras no se haya superado el limite de iteraciones
+    while n<=N:
+        #se evalua la funcion y su derivada
+        fx=f(x0)
+        dfx=derivada(f,x0, Tol)
+        #se calcula la siguiente aproximacion
+        xn = x0-(fx/float(dfx))
+        #en caso de cumplir criterios se devuelve la raiz
+        if abs(f(xn)) <= Tol and abs(xn-x0) <= Tol:
+            return xn
+        #actualizamos las aproximaciones
+        x0 = xn
+        #se incrementa el contador de iteraciones    
+        n=n+1
+    raise Exception("Se alcanzo el maximo numero de iteraciones y no se encontro raiz")
+
+def derivada(f, x, tol):
+    return (f(x+tol)-f(x))/(tol)    
 #----------------------- TEST OF THE MODULE ----------------------------------   
 if __name__ == '__main__':
-    #from google.colab import files
-    #files.upload()
     print("prueba")
