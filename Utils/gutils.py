@@ -317,7 +317,7 @@ def falsaPosicion(f,Tol,N,a,b):
         #se incrementa el contador de iteraciones
         n=n+1
         
-    '''Esta funcion implementa el metodo de la falsa posicion
+'''Esta funcion implementa el metodo de la falsa posicion
 para encontrar la raiz de una funcion.
 f:   funcion de la cual se busca la raiz
 df:  derivada de f
@@ -345,7 +345,40 @@ def newton(f,Tol,N,x0):
     raise Exception("Se alcanzo el maximo numero de iteraciones y no se encontro raiz")
 
 def derivada(f, x, tol):
-    return (f(x+tol)-f(x))/(tol)    
+    return (f(x+tol)-f(x))/(tol)
+
+# algoritmo para sustitucion hacia delante
+# n es el tamano de la dimension del problema
+# matriz L, vector b ya estan dados como parametros
+# guardar los resultados en el vector y
+# Ly=b
+def sustDelante(L, b):
+    n=len(L)
+    y=np.empty_like(b)
+    y[0] = b[0]
+    for i in range(1,n):
+        y[i] = b[i]
+        for j in range(0,i):
+            y[i] -= L[i][j]*y[j]
+        y[i] /= L[i][i]
+    return y
+
+# algoritmo para sustitucion hacia atras
+# n es el tamano de la dimension del problema
+# matriz U, vector y ya estan dados como parametros
+# guardar los resultados en el vector x
+# Ux=y
+def sustAtras(U, y):
+    n=len(U)
+    x=np.empty_like(y)
+    x[n-1] = y[n-1]/U[n-1][n-1]
+    for i in range(n-2,-1,-1):
+        x[i] = y[i]
+        for j in range(i+1,n):
+            x[i] -= U[i][j]*x[j]
+        x[i] /= U[i][i]
+    return x
+
 #----------------------- TEST OF THE MODULE ----------------------------------   
 if __name__ == '__main__':
     print("prueba")
