@@ -355,8 +355,7 @@ def derivada(f, x, tol):
 def sustDelante(L, b):
     n=len(L)
     y=np.empty_like(b)
-    y[0] = b[0]
-    for i in range(1,n):
+    for i in range(0,n):
         y[i] = b[i]
         for j in range(0,i):
             y[i] -= L[i][j]*y[j]
