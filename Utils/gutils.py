@@ -398,6 +398,25 @@ def sustAtras(U, y):
         x[i] /= U[i][i]
     return x
 
+# algoritmo para la factorizacion de Cholesky
+# L y L transpuesta se alamacenan en la misma matriz
+def cholesky(mat):
+    L = np.zeros_like(mat)
+    #Creamos un for que vaya de 0 al numero de renglones de la matriz.
+    for k in range(len(mat)):
+        #Creamos un for para ir sumando.
+        for i in range(k):
+            suma = mat[k,i]
+            for j in range(i):
+                suma -= (L[i,j]* L[k,j])
+            L[k,i] = (suma)/ L[i,i]
+            L[i,k] = L[k,i]
+        suma = mat[k,k]
+        for j in range(k):
+            suma -= (L[k,j]*L[k,j])
+        L[k,k] = np.sqrt(suma)
+    return L
+
 #----------------------- TEST OF THE MODULE ----------------------------------   
 if __name__ == '__main__':
     #test prueba
